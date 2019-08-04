@@ -72,7 +72,7 @@ class HomePage extends Component {
         const {isLoading, persons, person, showModal} = this.props;
 
         return (
-            isLoading===true ?<img src='/spinner.gif'/>:
+            isLoading===true ?<img src='/spinner.gif' alt='loading'/>:
             <div>
                     <Persons persons={persons} onClick={this.openModal}/>
                     <div className="button-row">
