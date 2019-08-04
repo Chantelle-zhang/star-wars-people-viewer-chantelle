@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.container{
+  padding:50px 0;
+}
+
+.persons-grid {
+  padding:15px;
+}
+
+.persons-grid>div{
+  padding:15px;
+  cursor: pointer;
+}
+.persons-grid>div:hover{
+  border:solid 2px #6c757d;
+}
+
+.button-row button{
+  margin:10px;
+}
