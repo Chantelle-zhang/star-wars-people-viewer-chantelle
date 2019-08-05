@@ -22,19 +22,16 @@ class HomePage extends Component {
     }
 
 
-
-
-
     componentDidMount() {
         const url = '/api/people/';
         this.props.getPersonsDataWithLoadingState(url);
     }
 
     getPage(pageUrl) {
-       if(pageUrl!==null) {
-           const url = this.props.persons[pageUrl];
-           this.props.getPersonsDataWithLoadingState(url);
-       }
+        if (pageUrl !== null) {
+            const url = this.props.persons[pageUrl];
+            this.props.getPersonsDataWithLoadingState(url);
+        }
 
     }
 
@@ -72,29 +69,29 @@ class HomePage extends Component {
         const {isLoading, persons, person, showModal} = this.props;
 
         return (
-            isLoading===true ?<img src='/spinner.gif' alt='loading'/>:
-            <div>
+            isLoading === true ? <img src='/spinner.gif' alt='loading'/> :
+                <div>
                     <Persons persons={persons} onClick={this.openModal}/>
                     <div className="button-row">
-                    <Button variant="secondary" onClick={() => this.getPage('previous')}>
-                    Previous
-                    </Button>
-                    <Button variant="secondary" onClick={() => this.getPage('next')}>
-                    Next
-                    </Button>
+                        <Button variant="secondary" onClick={() => this.getPage('previous')}>
+                            Previous
+                        </Button>
+                        <Button variant="secondary" onClick={() => this.getPage('next')}>
+                            Next
+                        </Button>
                     </div>
                     <Modal show={showModal} onHide={this.handleClose}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Person Detail</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body><Person person={person}/></Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                    Close
-                    </Button>
-                    </Modal.Footer>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Person Detail</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body><Person person={person}/></Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
                     </Modal>
-            </div>
+                </div>
 
         );
     }
@@ -102,7 +99,7 @@ class HomePage extends Component {
 
 
 const mapStateToProps = state => ({
-    isLoading:state.isLoading,
+    isLoading: state.isLoading,
     persons: state.persons,
     person: state.person,
     showModal: state.showModal
