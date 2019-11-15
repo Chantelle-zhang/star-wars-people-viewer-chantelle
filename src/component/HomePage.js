@@ -12,6 +12,7 @@ import {
 } from "../store/ActionCreators/actionTypes";
 import Persons from "../component/Persons";
 import Person from "../component/Person";
+import { LoadingWrapper } from "./LoadingComponent";
 
 
 class HomePage extends Component {
@@ -19,12 +20,6 @@ class HomePage extends Component {
         super();
         this.openModal = this.openModal.bind(this);
         this.handleClose = this.handleClose.bind(this);
-    }
-
-
-    componentDidMount() {
-        const url = '/api/people/';
-        this.props.getPersonsDataWithLoadingState(url);
     }
 
     getPage(pageUrl) {
@@ -66,10 +61,10 @@ class HomePage extends Component {
 
 
     render() {
-        const {isLoading, persons, person, showModal} = this.props;
+        console.log(this.props);
+        const {persons, person, showModal} = this.props;
 
         return (
-            isLoading ? <img src='/spinner.gif' alt='loading'/> :
                 <div>
                     <Persons persons={persons} onClick={this.openModal}/>
                     <div className="button-row">
@@ -99,7 +94,6 @@ class HomePage extends Component {
 
 
 const mapStateToProps = state => ({
-    isLoading: state.isLoading,
     persons: state.persons,
     person: state.person,
     showModal: state.showModal
@@ -113,16 +107,18 @@ const mapDispatchToProps = dispatch => ({
 
 Persons.propTypes = {
 
-    isLoading: PropTypes.bool,
     persons: PropTypes.object,
     onClick: PropTypes.func,
     showModal: PropTypes.bool
 
 };
 
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(HomePage);
+
+
 
 
