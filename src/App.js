@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom"
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {combineReducers} from 'redux'
@@ -14,7 +13,9 @@ import {
     showModal,
 } from "./store/reducer";
 
+import { LoadingWrapper } from "./component/LoadingComponent";
 import HomePage from "./component/HomePage";
+import { getPersonsDataWithLoadingState } from "./store/ActionCreators/actions";
 
 
 const middleware = [thunk];
@@ -25,26 +26,25 @@ let reducer = combineReducers({
     persons,
     person,
     showModal
-})
+});
 
 let store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(...middleware)));
 
+const HomePageWithLoading=LoadingWrapper(HomePage,  '/api/people/',getPersonsDataWithLoadingState);
 
 class App extends Component {
 
     render() {
         return (
             <Provider store={store}>
-                <BrowserRouter>
+
                     <Container className="text-center">
                         <h1>Star Wars People Viewer</h1>
-                        <Switch>
-                            <Route exact path='/' component={HomePage}/>
-                        </Switch>
+                     <HomePageWithLoading/>
                     </Container>
-                </BrowserRouter>
+
             </Provider>
         );
     }
@@ -52,3 +52,5 @@ class App extends Component {
 
 
 export default App;
+
+
